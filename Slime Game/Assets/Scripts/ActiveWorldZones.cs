@@ -22,7 +22,6 @@ public class ActiveWorldZones : MonoBehaviour
                 t.gameObject.TryGetComponent<Zone>(out Zone z);
                 if (zones[z.Id.x, z.Id.y] == null) { zones[z.Id.x, z.Id.y] = z; }
                 else { Debug.LogError("Two or more zones have the same Id"); }
-                //Debug.Log("Zone: " + z.Id.x + " " + z.Id.y);
             }
         }
     }
@@ -34,19 +33,14 @@ public class ActiveWorldZones : MonoBehaviour
 
     public void UpdateZones(Zone zone)
     {
-        // Your game sucks
         if (zone == null || zones[zone.Id.x, zone.Id.y] == null) { return; }
 
-        //eat ass
         if (currentZone == null)
         {
-            // I swear to god If you release this I will fucking destroy you and report you to the UN for comitting crimes that breach the Geneva convention
             foreach (Zone z in zones)
             {
-                // My code fixed your laziness
                 if (z != null)
                 {
-                    // and don't tell me what to write in my commit messages
                     z.gameObject.SetActive(false);
                 }
             }
@@ -64,18 +58,14 @@ public class ActiveWorldZones : MonoBehaviour
 
     void UpdateSurroundingZones(Vector2Int id)
     {
-        //Debug.Log("this worked");
         for (int x = id.x - 1; x <= id.x + 1; x++) // loops through the surrounding zones in the array
         {
             for (int y = id.y - 1; y <= id.y + 1; y++)
             {
                 if (x < 0 || x > WorldInfo.WorldWidth || y < 0 || y > WorldInfo.WorldHeight) continue;
                 if (zones[x, y] == null) continue;
-                //if (x == id.x && y == id.y) continue;
-                //if (zones[x, y].isActive) continue;
 
                 setZonesActive.Add(zones[x, y]); // zones to activate
-                //Debug.Log("Zone: " + zones[x, y].Id.x + " " + zones[x, y].Id.y + " isActive");
             }
         }
 
@@ -93,11 +83,6 @@ public class ActiveWorldZones : MonoBehaviour
 
         setZonesActive.Clear();
         setZonesDeactive.Clear();
-
-        foreach(Zone z in activeZones)
-        {
-           // Debug.Log("Zone: " + z.Id.x + " " + z.Id.y + " isActive");
-        }
     }
 
     void SetZonesActive()
