@@ -4,51 +4,98 @@ using UnityEngine;
 
 public class ActiveWorldZones : MonoBehaviour
 {
-    [HideInInspector] public Zone activeZone; 
-    [HideInInspector] public Zone lastZoneVisited; 
-    [SerializeField] private Zone[] zones = new Zone[100];
     [SerializeField] private Camera cam;
-    
+
+    [HideInInspector] public Zone currentZone;
+    [SerializeField] private Zone[,] zones = new Zone[WorldInfo.WorldWidth + 1, WorldInfo.WorldHeight + 1];
+
+    private List<Zone> activeZones = new List<Zone>();
+    private List<Zone> setZonesDeactive = new List<Zone>();
+    private List<Zone> setZonesActive = new List<Zone>();
+
     private void Awake()
     {
-        foreach(Transform t in transform)
+        foreach (Transform t in transform)
         {
-            if(t != null)
+            if (t != null)
             {
                 t.gameObject.TryGetComponent<Zone>(out Zone z);
-                if(zones[z.Id] == null) { zones[z.Id] = z; }
+                if (zones[z.Id.x, z.Id.y] == null) { zones[z.Id.x, z.Id.y] = z; }
                 else { Debug.LogError("Two or more zones have the same Id"); }
+                //Debug.Log("Zone: " + z.Id.x + " " + z.Id.y);
             }
         }
     }
 
     private void Start()
     {
-        activeZone = zones[0];
-        lastZoneVisited = zones[0];
+        currentZone = zones[50, 100];
+        UpdateSurroundingZones(currentZone.Id);
     }
 
     public void UpdateZones(Zone zone)
     {
-        if(zones[zone.Id] != null && activeZone != zone)
+        if (zone == null || zones[zone.Id.x, zone.Id.y] == null) { return; }
+
+        if (currentZone != zone) currentZone = zone;
+
+        UpdateSurroundingZones(currentZone.Id);
+        UpdateCamera(zone);
+    }
+
+    void UpdateSurroundingZones(Vector2Int id)
+    {
+        //Debug.Log("this worked");
+        for (int x = id.x - 1; x <= id.x + 1; x++) // loops through the surrounding zones in the array
         {
-            lastZoneVisited = activeZone;
-            activeZone = zone;
+            for (int y = id.y - 1; y <= id.y + 1; y++)
+            {
+                if (x < 0 || x > WorldInfo.WorldWidth || y < 0 || y > WorldInfo.WorldHeight) continue;
+                if (zones[x, y] == null) continue;
+                if (x == id.x && y == id.y) continue;
+                //if (zones[x, y].isActive) continue;
+
+                setZonesActive.Add(zones[x, y]); // zones to activate
+                //Debug.Log("Zone: " + zones[x, y].Id.x + " " + zones[x, y].Id.y + " isActive");
+            }
         }
 
-        foreach(Zone z in zones)
+        for(int i = 0; i < activeZones.Count; i++) // loop through active zones to check the current list of zones to set active remove the outliers 
         {
-            if(z != null)
+            Zone temp = activeZones[i];
+            if(setZonesActive.Contains(temp))
             {
-                int id = z.Id;
-                if(id == activeZone.Id - 1 || id == activeZone.Id || id == activeZone.Id + 1)
-                {
-                    z.gameObject.SetActive(true);
-                    continue;
-                }
-
-                z.gameObject.SetActive(false);
+                setZonesDeactive.Add(temp);
             }
+        }
+
+        SetZonesActive();
+        SetZonesDeactive();
+
+        setZonesActive.Clear();
+        setZonesDeactive.Clear();
+
+        foreach(Zone z in activeZones)
+        {
+           // Debug.Log("Zone: " + z.Id.x + " " + z.Id.y + " isActive");
+        }
+    }
+
+    void SetZonesActive()
+    {
+        foreach (Zone z in setZonesActive)
+        {
+            z.gameObject.SetActive(true);
+            activeZones.Add(z);
+        }
+    }
+
+    void SetZonesDeactive()
+    {
+        foreach (Zone z in setZonesDeactive)
+        {
+            z.gameObject.SetActive(false);
+            activeZones.Remove(z);
         }
     }
 
@@ -57,13 +104,8 @@ public class ActiveWorldZones : MonoBehaviour
         cam.transform.position = zone.transform.position;
     }
 
-    int GetCurrentZoneId()
+    public Vector2 GetCurrentZoneId()
     {
-        return activeZone.Id;
-    }
-
-    Vector3 GetLastCheckPoint(Zone zone)
-    {
-        return zone.checkPoint.transform.position;
+        return currentZone.Id;
     }
 }

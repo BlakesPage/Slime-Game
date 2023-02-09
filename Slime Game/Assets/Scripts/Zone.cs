@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 [ExecuteInEditMode]
 [RequireComponent(typeof(BoxCollider2D))]
 public class Zone : MonoBehaviour
 {
     public new string name;
-    public int Id;
+    public Vector2Int Id;
     public GameObject checkPoint;
     [HideInInspector] public BoxCollider2D zoneCollider;
     private List<GameObject> zoneObjects = new List<GameObject>();
@@ -55,6 +56,12 @@ public class Zone : MonoBehaviour
 
     private void OnValidate()
     {
-        gameObject.name = name;
+        gameObject.name = name + " Id: " + Id.x + ", " + Id.y;
+    }
+
+
+    public bool isActive
+    {
+        get { return gameObject.activeSelf; }
     }
 }

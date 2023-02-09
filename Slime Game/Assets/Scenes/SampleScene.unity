@@ -2880,7 +2880,7 @@ GameObject:
   - component: {fileID: 1062239617}
   - component: {fileID: 1062239616}
   m_Layer: 0
-  m_Name: Starting Zone
+  m_Name: 'Starting Zone Id: 50, 100'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2913,7 +2913,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: Starting Zone
-  Id: 0
+  Id: {x: 50, y: 100}
   checkPoint: {fileID: 0}
   zoneCollider: {fileID: 1062239617}
 --- !u!61 &1062239617
@@ -3648,7 +3648,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1324164596
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4601,110 +4601,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5291324eb2588340ae6c8c205008443, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activeZone: {fileID: 0}
-  lastZoneVisited: {fileID: 0}
-  zones:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   cam: {fileID: 519420031}
+  currentZone: {fileID: 0}
 --- !u!4 &1730066839
 Transform:
   m_ObjectHideFlags: 0
@@ -4933,7 +4831,7 @@ GameObject:
   - component: {fileID: 1852644514}
   - component: {fileID: 1852644513}
   m_Layer: 0
-  m_Name: Zone 2
+  m_Name: 'Zone 2 Id: 50, 98'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4966,7 +4864,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: Zone 2
-  Id: 2
+  Id: {x: 50, y: 98}
   checkPoint: {fileID: 0}
   zoneCollider: {fileID: 1852644514}
 --- !u!61 &1852644514
@@ -5073,7 +4971,7 @@ GameObject:
   - component: {fileID: 1933159523}
   - component: {fileID: 1933159522}
   m_Layer: 0
-  m_Name: Zone 1
+  m_Name: 'Zone 1 Id: 50, 99'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5106,7 +5004,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: Zone 1
-  Id: 1
+  Id: {x: 50, y: 99}
   checkPoint: {fileID: 0}
   zoneCollider: {fileID: 1933159523}
 --- !u!61 &1933159523
@@ -5699,17 +5597,21 @@ PrefabInstance:
       propertyPath: _follow
       value: 
       objectReference: {fileID: 519420030}
+    - target: {fileID: 8970995285919040582, guid: 1041cf7bde5851a4bbd87d6b6f11f7c3, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8970995285919040697, guid: 1041cf7bde5851a4bbd87d6b6f11f7c3, type: 3}
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8970995285919040697, guid: 1041cf7bde5851a4bbd87d6b6f11f7c3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8.05
+      value: 7.13
       objectReference: {fileID: 0}
     - target: {fileID: 8970995285919040697, guid: 1041cf7bde5851a4bbd87d6b6f11f7c3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.06
+      value: 3.94
       objectReference: {fileID: 0}
     - target: {fileID: 8970995285919040697, guid: 1041cf7bde5851a4bbd87d6b6f11f7c3, type: 3}
       propertyPath: m_LocalPosition.z
