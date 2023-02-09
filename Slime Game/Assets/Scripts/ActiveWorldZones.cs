@@ -46,14 +46,10 @@ public class ActiveWorldZones : MonoBehaviour
             }
         }
 
-        if (currentZone != zone)
-        {
-            currentZone = zone;
-            currentZone.gameObject.SetActive(true);
-        }
+        if (currentZone != zone) currentZone = zone;
 
         UpdateSurroundingZones(currentZone.Id);
-        UpdateCamera(zone);
+        UpdateCamera(currentZone);
     }
 
     void UpdateSurroundingZones(Vector2Int id)
@@ -80,9 +76,6 @@ public class ActiveWorldZones : MonoBehaviour
 
         SetZonesActive();
         SetZonesDeactive();
-
-        setZonesActive.Clear();
-        setZonesDeactive.Clear();
     }
 
     void SetZonesActive()
@@ -92,6 +85,8 @@ public class ActiveWorldZones : MonoBehaviour
             z.gameObject.SetActive(true);
             activeZones.Add(z);
         }
+
+        setZonesActive.Clear();
     }
 
     void SetZonesDeactive()
@@ -101,6 +96,8 @@ public class ActiveWorldZones : MonoBehaviour
             z.gameObject.SetActive(false);
             activeZones.Remove(z);
         }
+
+        setZonesDeactive.Clear();
     }
 
     public void UpdateCamera(Zone zone)

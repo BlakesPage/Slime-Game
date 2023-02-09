@@ -133,11 +133,9 @@ public class Jump : Subject
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log(collision.gameObject.name);
         if (collision.gameObject.TryGetComponent<Zone>(out Zone zone))
         {
             world.UpdateZones(zone);
-            world.UpdateCamera(zone);
         }
     }
 }

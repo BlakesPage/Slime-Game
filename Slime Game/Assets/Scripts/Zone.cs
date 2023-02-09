@@ -13,21 +13,7 @@ public class Zone : MonoBehaviour
     [HideInInspector] public BoxCollider2D zoneCollider;
     private List<GameObject> zoneObjects = new List<GameObject>();
 
-    public void SetChildrenActive()
-    {
-        for(int i = 0; i < zoneObjects.Count; i++)
-        {
-            zoneObjects[i].SetActive(true);
-        }
-    }
-
-    public void SetChildrenDeactive()
-    {
-        for (int i = 0; i < zoneObjects.Count; i++)
-        {
-            zoneObjects[i].SetActive(false);
-        }
-    }
+    
 
     private void Awake()
     {
@@ -59,9 +45,24 @@ public class Zone : MonoBehaviour
         gameObject.name = name + " Id: " + Id.x + ", " + Id.y;
     }
 
-
     public bool isActive
     {
         get { return gameObject.activeSelf; }
+    }
+
+    public void SetChildrenActive()
+    {
+        for (int i = 0; i < zoneObjects.Count; i++)
+        {
+            zoneObjects[i].SetActive(true);
+        }
+    }
+
+    public void SetChildrenDeactive()
+    {
+        for (int i = 0; i < zoneObjects.Count; i++)
+        {
+            zoneObjects[i].SetActive(false);
+        }
     }
 }
