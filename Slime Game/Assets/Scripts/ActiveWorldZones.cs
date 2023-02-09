@@ -29,15 +29,34 @@ public class ActiveWorldZones : MonoBehaviour
 
     private void Start()
     {
-        currentZone = zones[50, 100];
-        UpdateSurroundingZones(currentZone.Id);
+       
     }
 
     public void UpdateZones(Zone zone)
     {
+        // Your game sucks
         if (zone == null || zones[zone.Id.x, zone.Id.y] == null) { return; }
 
-        if (currentZone != zone) currentZone = zone;
+        //eat ass
+        if (currentZone == null)
+        {
+            // I swear to god If you release this I will fucking destroy you and report you to the UN for comitting crimes that breach the Geneva convention
+            foreach (Zone z in zones)
+            {
+                // My code fixed your laziness
+                if (z != null)
+                {
+                    // and don't tell me what to write in my commit messages
+                    z.gameObject.SetActive(false);
+                }
+            }
+        }
+
+        if (currentZone != zone)
+        {
+            currentZone = zone;
+            currentZone.gameObject.SetActive(true);
+        }
 
         UpdateSurroundingZones(currentZone.Id);
         UpdateCamera(zone);
@@ -52,7 +71,7 @@ public class ActiveWorldZones : MonoBehaviour
             {
                 if (x < 0 || x > WorldInfo.WorldWidth || y < 0 || y > WorldInfo.WorldHeight) continue;
                 if (zones[x, y] == null) continue;
-                if (x == id.x && y == id.y) continue;
+                //if (x == id.x && y == id.y) continue;
                 //if (zones[x, y].isActive) continue;
 
                 setZonesActive.Add(zones[x, y]); // zones to activate
@@ -63,7 +82,7 @@ public class ActiveWorldZones : MonoBehaviour
         for(int i = 0; i < activeZones.Count; i++) // loop through active zones to check the current list of zones to set active remove the outliers 
         {
             Zone temp = activeZones[i];
-            if(setZonesActive.Contains(temp))
+            if(!setZonesActive.Contains(temp))
             {
                 setZonesDeactive.Add(temp);
             }
