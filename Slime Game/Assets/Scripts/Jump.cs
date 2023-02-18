@@ -5,27 +5,31 @@ using UnityEngine.UI;
 
 public class Jump : Subject
 {
-    public float power = 10f;
+    // Private Componets 
+    private Camera cam;
     private Rigidbody2D rb;
-    [SerializeField] private follow _follow;
+    private Trajectory tl;
+
+    // Inspector Components 
     [SerializeField] private ActiveWorldZones world;
 
+    // Public Variables
+    public float power = 10f;
     public bool canJump;
     public bool StuckToWall;
-
-    float height;
-
-    Trajectory tl;
-
     public Vector2 minPower;
     public Vector2 maxPower;
 
-    Camera cam;
+    // Private Variables
+    private float height;
+
+    // Private Vectors for calculations
     Vector2 force;
     Vector3 startPoint;
     Vector3 endPoint;
     Vector3 wallPoint;
 
+    // Text
     public Text Jumps;
     public Text Height;
 

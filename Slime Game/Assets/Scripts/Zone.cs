@@ -13,8 +13,6 @@ public class Zone : MonoBehaviour
     [HideInInspector] public BoxCollider2D zoneCollider;
     private List<GameObject> zoneObjects = new List<GameObject>();
 
-    
-
     private void Awake()
     {
         transform.position = new Vector3(0, transform.position.y, transform.position.z);
@@ -24,6 +22,7 @@ public class Zone : MonoBehaviour
             GameObject go = t.gameObject;
             zoneObjects.Add(go);
         }
+
         float height = (Camera.main.orthographicSize * 2f) - 0.7f;
         float width = (height + 0.7f) * Camera.main.aspect;
 

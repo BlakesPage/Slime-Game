@@ -6,8 +6,8 @@ public class ActiveWorldZones : MonoBehaviour
 {
     [SerializeField] private Camera cam;
 
-    [HideInInspector] public Zone currentZone;
-    [SerializeField] private Zone[,] zones = new Zone[WorldInfo.WorldWidth + 1, WorldInfo.WorldHeight + 1];
+    private Zone currentZone;
+    private Zone[,] zones = new Zone[WorldInfo.WorldWidth + 1, WorldInfo.WorldHeight + 1];
 
     private List<Zone> activeZones = new List<Zone>();
     private List<Zone> setZonesDeactive = new List<Zone>();
@@ -102,10 +102,10 @@ public class ActiveWorldZones : MonoBehaviour
 
     public void UpdateCamera(Zone zone)
     {
-        cam.transform.position = zone.transform.position;
+        cam.transform.position = new Vector3(zone.transform.position.x, zone.transform.position.y, -10);
     }
 
-    public Vector2 GetCurrentZoneId()
+    public Vector2Int GetCurrentZoneId()
     {
         return currentZone.Id;
     }
