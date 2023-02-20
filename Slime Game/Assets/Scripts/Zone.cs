@@ -11,7 +11,10 @@ public class Zone : MonoBehaviour
     public Vector2Int Id;
     public GameObject checkPoint;
     [HideInInspector] public BoxCollider2D zoneCollider;
+
+
     private List<GameObject> zoneObjects = new List<GameObject>();
+    private bool _visited = false;
 
     private void Awake()
     {
