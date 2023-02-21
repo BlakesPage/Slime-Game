@@ -10,12 +10,12 @@ public class Zone : MonoBehaviour
     public new string name;
     public Vector2Int Id;
     public GameObject checkPoint;
+    [HideInInspector] public bool visited = false;
     [HideInInspector] public BoxCollider2D zoneCollider;
 
-
     private List<GameObject> zoneObjects = new List<GameObject>();
-    private bool _visited = false;
-
+    [SerializeField] private bool checkpoint;
+    
     private void Awake()
     {
         transform.position = new Vector3(0, transform.position.y, transform.position.z);

@@ -173,7 +173,9 @@ MonoBehaviour:
   name: Zone
   Id: {x: 0, y: 0}
   checkPoint: {fileID: 6951609148494637137}
+  visited: 0
   zoneCollider: {fileID: 7828899536419933459}
+  checkpoint: 0
 --- !u!1 &9128453729548598750
 GameObject:
   m_ObjectHideFlags: 0

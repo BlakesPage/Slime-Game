@@ -14,11 +14,11 @@ public class Jump : Subject
     [SerializeField] private ActiveWorldZones world;
 
     // Public Variables
-    public float power = 10f;
+    public float power;
     public bool canJump;
     public bool StuckToWall;
-    public Vector2 minPower;
-    public Vector2 maxPower;
+    private Vector2 minPowerVector;
+    private Vector2 maxPowerVector;
 
     // Private Variables
     private float height;
@@ -40,6 +40,10 @@ public class Jump : Subject
         rb = GetComponent<Rigidbody2D>();
         PlayerStats.jumpCount = 0;
         height = 0;
+        minPowerVector.x = -power;
+        minPowerVector.y = -power;
+        maxPowerVector.x = power;
+        maxPowerVector.y = power;
     }
 
     void Update()
@@ -85,8 +89,8 @@ public class Jump : Subject
                 endPoint = cam.ScreenToWorldPoint(Input.mousePosition);
                 endPoint.z = 15;
 
-                force = new Vector2(Mathf.Clamp(startPoint.x - endPoint.x, minPower.x, maxPower.x), Mathf.Clamp(startPoint.y - endPoint.y, minPower.y, maxPower.y));
-                rb.AddForce(force * power, ForceMode2D.Impulse);
+                force = new Vector2(Mathf.Clamp(startPoint.x - endPoint.x, minPowerVector.x, maxPowerVector.x), Mathf.Clamp(startPoint.y - endPoint.y, minPowerVector.y, maxPowerVector.y));
+                rb.AddForce(force * 5, ForceMode2D.Impulse);
                 canJump = false;
                 PlayerStats.jumpCount++;
                 tl.Endline();

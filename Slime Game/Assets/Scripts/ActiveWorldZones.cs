@@ -5,6 +5,7 @@ using UnityEngine;
 public class ActiveWorldZones : MonoBehaviour
 {
     [SerializeField] private Camera cam;
+    [Range(1, 2)] [SerializeField] private int activeZoneSpacing;
 
     private Zone currentZone;
     private Zone[,] zones = new Zone[WorldInfo.WorldWidth + 1, WorldInfo.WorldHeight + 1];
@@ -50,13 +51,14 @@ public class ActiveWorldZones : MonoBehaviour
 
         UpdateSurroundingZones(currentZone.Id);
         UpdateCamera(currentZone);
+        currentZone.visited = true;
     }
 
     void UpdateSurroundingZones(Vector2Int id)
     {
-        for (int x = id.x - 1; x <= id.x + 1; x++) // loops through the surrounding zones in the array
+        for (int x = id.x - activeZoneSpacing; x <= id.x + activeZoneSpacing; x++) // loops through the surrounding zones in the array
         {
-            for (int y = id.y - 1; y <= id.y + 1; y++)
+            for (int y = id.y - activeZoneSpacing; y <= id.y + activeZoneSpacing; y++)
             {
                 if (x < 0 || x > WorldInfo.WorldWidth || y < 0 || y > WorldInfo.WorldHeight) continue;
                 if (zones[x, y] == null) continue;
