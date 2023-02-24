@@ -5,7 +5,7 @@ using UnityEngine;
 public class ActiveWorldZones : MonoBehaviour
 {
     [SerializeField] private Camera cam;
-    [Range(1, 2)] [SerializeField] private int activeZoneSpacing;
+    [Range(1, 5)] [SerializeField] private int activeZoneSpacing;
 
     private Zone currentZone;
     private Zone[,] zones = new Zone[WorldInfo.WorldWidth + 1, WorldInfo.WorldHeight + 1];
