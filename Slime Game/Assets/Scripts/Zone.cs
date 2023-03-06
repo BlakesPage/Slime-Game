@@ -15,7 +15,8 @@ public class Zone : MonoBehaviour
 
     private List<GameObject> zoneObjects = new List<GameObject>();
     [SerializeField] private bool checkpoint;
-    
+
+    #region Awake
     private void Awake()
     {
         transform.position = new Vector3(0, transform.position.y, transform.position.z);
@@ -33,6 +34,9 @@ public class Zone : MonoBehaviour
         zoneCollider.isTrigger = true;
         zoneCollider.size = new Vector2(width, height);
     }
+    #endregion Awake
+
+    #region Draw Gizmos
     void OnDrawGizmosSelected()
     {
         // Draw a red wirecube at the transforms position
@@ -41,15 +45,11 @@ public class Zone : MonoBehaviour
         Gizmos.color = new Color(1, 0, 0, 0.5f);
         Gizmos.DrawWireCube(new Vector3(0, transform.position.y, 0), new Vector3(width, height, 1));
     }
+    #endregion Draw Gizmos
 
     private void OnValidate()
     {
         gameObject.name = name + " Id: " + Id.x + ", " + Id.y;
-    }
-
-    public bool isActive
-    {
-        get { return gameObject.activeSelf; }
     }
 
     public void SetChildrenActive()

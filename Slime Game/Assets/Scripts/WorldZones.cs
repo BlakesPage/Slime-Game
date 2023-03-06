@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ActiveWorldZones : MonoBehaviour
+public class WorldZones : MonoBehaviour
 {
     [SerializeField] private Camera cam;
     [Range(1, 5)] [SerializeField] private int activeZoneSpacing;
 
+    [SerializeField] private Zone startingZone;
     private Zone currentZone;
     private Zone[,] zones = new Zone[WorldInfo.WorldWidth + 1, WorldInfo.WorldHeight + 1];
 
@@ -29,23 +30,21 @@ public class ActiveWorldZones : MonoBehaviour
 
     private void Start()
     {
-       
-    }
-
-    public void UpdateZones(Zone zone)
-    {
-        if (zone == null || zones[zone.Id.x, zone.Id.y] == null) { return; }
-
         if (currentZone == null)
         {
             foreach (Zone z in zones)
             {
-                if (z != null)
+                if (z != null && z.Id != startingZone.Id)
                 {
                     z.gameObject.SetActive(false);
                 }
             }
         }
+    }
+
+    public void UpdateZones(Zone zone)
+    {
+        if (zone == null || zones[zone.Id.x, zone.Id.y] == null) { return; }
 
         if (currentZone != zone) currentZone = zone;
 
@@ -67,10 +66,10 @@ public class ActiveWorldZones : MonoBehaviour
             }
         }
 
-        for(int i = 0; i < activeZones.Count; i++) // loop through active zones to check the current list of zones to set active remove the outliers 
+        for (int i = 0; i < activeZones.Count; i++) // loop through active zones to check the current list of zones to set active remove the outliers 
         {
             Zone temp = activeZones[i];
-            if(!setZonesActive.Contains(temp))
+            if (!setZonesActive.Contains(temp))
             {
                 setZonesDeactive.Add(temp);
             }

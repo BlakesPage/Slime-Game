@@ -9,9 +9,7 @@ public class Jump : Subject
     private Camera cam;
     private Rigidbody2D rb;
     private Trajectory tl;
-
-    // Inspector Components 
-    [SerializeField] private ActiveWorldZones world;
+    private WorldZones world;
 
     // Public Variables
     public float power;
@@ -33,7 +31,7 @@ public class Jump : Subject
     public Text Jumps;
     public Text Height;
 
-    void Start()
+    private void Awake()
     {
         cam = Camera.main;
         tl = GetComponent<Trajectory>();
@@ -44,6 +42,8 @@ public class Jump : Subject
         minPowerVector.y = -power;
         maxPowerVector.x = power;
         maxPowerVector.y = power;
+
+        world = FindObjectOfType<WorldZones>();
     }
 
     void Update()
@@ -70,31 +70,34 @@ public class Jump : Subject
     }
     void Movement()
     {
-        if (canJump)
+        if(!hasMovement)
         {
-            if (Input.GetMouseButtonDown(0))
+            if (canJump)
             {
-                startPoint = cam.ScreenToWorldPoint(Input.mousePosition);
-                startPoint.z = 15;
-            }
-            if (Input.GetMouseButton(0))
-            {
-                Vector3 currentPoint = cam.ScreenToWorldPoint(Input.mousePosition);
-                currentPoint.z = 15;
-                tl.LineRenderer(startPoint, currentPoint);
-            }
-            if (Input.GetMouseButtonUp(0))
-            {
-                StuckToWall = false;
-                endPoint = cam.ScreenToWorldPoint(Input.mousePosition);
-                endPoint.z = 15;
+                if (Input.GetMouseButtonDown(0))
+                {
+                    startPoint = cam.ScreenToWorldPoint(Input.mousePosition);
+                    startPoint.z = 15;
+                }
+                if (Input.GetMouseButton(0))
+                {
+                    Vector3 currentPoint = cam.ScreenToWorldPoint(Input.mousePosition);
+                    currentPoint.z = 15;
+                    tl.LineRenderer(startPoint, currentPoint);
+                }
+                if (Input.GetMouseButtonUp(0))
+                {
+                    StuckToWall = false;
+                    endPoint = cam.ScreenToWorldPoint(Input.mousePosition);
+                    endPoint.z = 15;
 
-                force = new Vector2(Mathf.Clamp(startPoint.x - endPoint.x, minPowerVector.x, maxPowerVector.x), Mathf.Clamp(startPoint.y - endPoint.y, minPowerVector.y, maxPowerVector.y));
-                rb.AddForce(force * 5, ForceMode2D.Impulse);
-                canJump = false;
-                PlayerStats.jumpCount++;
-                tl.Endline();
-                NotifyObserver(PlayerActions.Jump);
+                    force = new Vector2(Mathf.Clamp(startPoint.x - endPoint.x, minPowerVector.x, maxPowerVector.x), Mathf.Clamp(startPoint.y - endPoint.y, minPowerVector.y, maxPowerVector.y));
+                    rb.AddForce(force * 5, ForceMode2D.Impulse);
+                    canJump = false;
+                    PlayerStats.jumpCount++;
+                    tl.Endline();
+                    NotifyObserver(PlayerActions.Jump);
+                }
             }
         }
         if (StuckToWall)
@@ -104,8 +107,10 @@ public class Jump : Subject
         }
     }
 
-
-    // idk what the fuck i was thinking here fix this shit
+    bool hasMovement
+    {
+        get { return rb.velocity.magnitude > 0.1f; }
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
