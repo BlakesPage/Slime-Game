@@ -5,15 +5,20 @@ using UnityEngine;
 public class WorldZones : MonoBehaviour
 {
     [SerializeField] private Camera cam;
+    [SerializeField] private GameObject player;
     [Range(1, 5)] [SerializeField] private int activeZoneSpacing;
 
     [SerializeField] private Zone startingZone;
     private Zone currentZone;
     private Zone[,] zones = new Zone[WorldInfo.WorldWidth + 1, WorldInfo.WorldHeight + 1];
 
+    public Vector2Int CurrentCheckPoint;
+
     private List<Zone> activeZones = new List<Zone>();
     private List<Zone> setZonesDeactive = new List<Zone>();
     private List<Zone> setZonesActive = new List<Zone>();
+    private List<Zone> checkPoints = new List<Zone>();
+    
 
     private void Awake()
     {
@@ -40,11 +45,16 @@ public class WorldZones : MonoBehaviour
                 }
             }
         }
+        currentZone = startingZone;
+
+        CurrentCheckPoint = currentZone.Id;
     }
 
     public void UpdateZones(Zone zone)
     {
         if (zone == null || zones[zone.Id.x, zone.Id.y] == null) { return; }
+
+        UpdateCurrentCheckPoint();
 
         if (currentZone != zone) currentZone = zone;
 
@@ -52,6 +62,38 @@ public class WorldZones : MonoBehaviour
         UpdateCamera(currentZone);
         currentZone.visited = true;
     }
+
+    #region CheckPoints
+    void UpdateCurrentCheckPoint()
+    {
+        if(currentZone.isCheckPoint)
+        {
+            if(!checkPoints.Contains(currentZone))
+            {
+                checkPoints.Add(currentZone);
+                CurrentCheckPoint = checkPoints[checkPoints.Count - 1].Id;
+            }
+        }
+    }
+
+    public void GoToCurrentCheckPoint()
+    {
+        foreach (Zone z in zones)
+        {
+            if(z != null)
+            {
+                if (z.Id != CurrentCheckPoint || !z.isCheckPoint) continue;
+
+                UpdateSurroundingZones(z.Id);
+                UpdateCamera(z);
+                UpdatePlayerPosCheckPoint(z);
+
+                break;
+            }
+        }
+    }
+
+    #endregion
 
     void UpdateSurroundingZones(Vector2Int id)
     {
@@ -106,7 +148,13 @@ public class WorldZones : MonoBehaviour
         cam.transform.position = new Vector3(zone.transform.position.x, zone.transform.position.y, -10);
     }
 
-    public Vector2Int GetCurrentZoneId()
+    void UpdatePlayerPosCheckPoint(Zone z)
+    {
+        player.transform.position = z.GetZoneCheckPoint;
+        player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+    }
+
+    Vector2Int GetCurrentZoneId()
     {
         return currentZone.Id;
     }

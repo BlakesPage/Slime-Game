@@ -173,6 +173,7 @@ MonoBehaviour:
   name: Zone
   Id: {x: 0, y: 0}
   checkPoint: {fileID: 6951609148494637137}
+  isCheckPoint: 0
   visited: 0
   zoneCollider: {fileID: 7828899536419933459}
   checkpoint: 0

@@ -10,6 +10,7 @@ public class Zone : MonoBehaviour
     public new string name;
     public Vector2Int Id;
     public GameObject checkPoint;
+    public bool isCheckPoint;
     [HideInInspector] public bool visited = false;
     [HideInInspector] public BoxCollider2D zoneCollider;
 
@@ -20,7 +21,7 @@ public class Zone : MonoBehaviour
     private void Awake()
     {
         transform.position = new Vector3(0, transform.position.y, transform.position.z);
-        
+
         foreach (Transform t in this.transform)
         {
             GameObject go = t.gameObject;
@@ -67,4 +68,10 @@ public class Zone : MonoBehaviour
             zoneObjects[i].SetActive(false);
         }
     }
+
+    public Vector3 GetZoneCheckPoint
+    {
+        get { return checkPoint.transform.position; }
+    }
+
 }

@@ -397,6 +397,10 @@ PrefabInstance:
       propertyPath: Id.x
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8240043918318385554, guid: e9383484209a4d44382003327be633c5, type: 3}
+      propertyPath: isCheckPoint
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8402814999947831891, guid: e9383484209a4d44382003327be633c5, type: 3}
       propertyPath: m_Name
       value: 'Zone Id: 1, 0'
@@ -700,6 +704,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 663120750}
   m_CullTransparentMesh: 1
+--- !u!1 &724825677 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8970995285919040580, guid: 1041cf7bde5851a4bbd87d6b6f11f7c3, type: 3}
+  m_PrefabInstance: {fileID: 8970995286977272632}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &914559498
 GameObject:
   m_ObjectHideFlags: 0
@@ -861,6 +870,10 @@ PrefabInstance:
       propertyPath: Id.x
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 8240043918318385554, guid: e9383484209a4d44382003327be633c5, type: 3}
+      propertyPath: isCheckPoint
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8402814999947831891, guid: e9383484209a4d44382003327be633c5, type: 3}
       propertyPath: m_Name
       value: 'Zone Id: 4, 0'
@@ -872,7 +885,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8970995285919040581, guid: 1041cf7bde5851a4bbd87d6b6f11f7c3, type: 3}
   m_PrefabInstance: {fileID: 8970995286977272632}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 724825677}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 39f61235bdf833046886049569b66556, type: 3}
@@ -1210,8 +1223,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 519420031}
+  player: {fileID: 724825677}
   activeZoneSpacing: 1
   startingZone: {fileID: 1174318285}
+  CurrentCheckPoint: {x: 0, y: 0}
 --- !u!1001 &1740237344
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1438,6 +1453,10 @@ PrefabInstance:
       propertyPath: Id.x
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 8240043918318385554, guid: e9383484209a4d44382003327be633c5, type: 3}
+      propertyPath: isCheckPoint
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8402814999947831891, guid: e9383484209a4d44382003327be633c5, type: 3}
       propertyPath: m_Name
       value: 'Zone Id: 2, 0'
@@ -1556,6 +1575,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4467332499874651539, guid: e9383484209a4d44382003327be633c5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 4467332499874651539, guid: e9383484209a4d44382003327be633c5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.25
+      objectReference: {fileID: 0}
     - target: {fileID: 7828899536419933459, guid: e9383484209a4d44382003327be633c5, type: 3}
       propertyPath: m_Size.x
       value: 17.777779
@@ -1563,6 +1590,10 @@ PrefabInstance:
     - target: {fileID: 8240043918318385554, guid: e9383484209a4d44382003327be633c5, type: 3}
       propertyPath: Id.x
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8240043918318385554, guid: e9383484209a4d44382003327be633c5, type: 3}
+      propertyPath: isCheckPoint
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8402814999947831891, guid: e9383484209a4d44382003327be633c5, type: 3}
       propertyPath: m_Name
@@ -1628,6 +1659,10 @@ PrefabInstance:
     - target: {fileID: 4467332499874651539, guid: e9383484209a4d44382003327be633c5, type: 3}
       propertyPath: m_LocalPosition.y
       value: -3.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 8240043918318385554, guid: e9383484209a4d44382003327be633c5, type: 3}
+      propertyPath: isCheckPoint
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8402814999947831891, guid: e9383484209a4d44382003327be633c5, type: 3}
       propertyPath: m_Name
